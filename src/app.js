@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', (_, response) => {
-  response.render('index', { title: 'Index' })
+  response.render('index', { title: 'Account Summary', accounts })
 })
 
 const PORT = 3000;
