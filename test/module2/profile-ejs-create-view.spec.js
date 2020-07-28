@@ -21,7 +21,7 @@ describe('Create `profile` view', () => {
     assert(/<%=\s*user.address\s*%>/.test(file), 'The users address is not displayed.');
     assert(/<h1>\s*Profile\s*<\/h1>/.test(file), 'The title `<h1>` element seems to be missing.');
     assert(
-      /<a\s+href=('|")?\/('|")?>(.*)<\/a>/.test(file),
+      /<a\s+href=('|")?\/('|")\s?>(.*)<\/a>/.test(file),
       'A link to the Account Summary seems to be missing.'
     );
     assert(/<%-\s+include\(('|")footer(\.ejs)?('|")\)(;)?\s*%>/.test(file), 'Have you included the `footer` view?');
