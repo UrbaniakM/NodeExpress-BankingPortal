@@ -40,9 +40,11 @@ describe('Transfer post route write JSON', () => {
       typeof writeFileSyncStub.firstCall.args[1] === 'string',
       'The content being passed to `writeFileSync` is not a string.'
     );
-    assert(typeof writeFileSyncStub.firstCall.args[2] !== 'undefined', 'It is best if you encode the string as utf8.');
+    const arg2 = writeFileSyncStub.firstCall.args[2];
+    const encoding = typeof arg2 === 'string' ? arg2 : arg2.encoding;
+    assert(typeof encoding !== 'undefined', 'It is best if you encode the string as utf8.');
     assert(
-      writeFileSyncStub.firstCall.args[2].replace('-', '').toLowerCase() === 'utf8',
+      encoding.replace('-', '').toLowerCase() === 'utf8',
       'It is best if you encode the string as utf8.'
     );
   });
