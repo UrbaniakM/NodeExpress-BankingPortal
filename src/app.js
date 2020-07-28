@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { response } = require('express');
+const { parse } = require('path');
 
 const app = express();
 
@@ -30,8 +32,16 @@ app.get('/credit', (_, response) => {
 app.get('/profile', (_, response) => {
   response.render('profile', { user: users[0] })
 });
+
 app.get('/transfer', (_, response) => {
   response.render('transfer')
+});
+app.post('/transfer', (request, _) => {
+  const parsedAmount = Number.parseInt(request.body.amount);
+  accounts[request.body.from].balance -= parsedAmount;
+  accounts[request.body.to].balance += parsedAmount;
+  const accountsJSON = JSON.stringify(accounts);
+  fs.writeFileSync(path.join(__dirname, 'json', 'accounts.json'), accountsJSON, { encoding: 'utf-8' });
 });
 
 app.use(express.urlencoded({ extended: true }));
