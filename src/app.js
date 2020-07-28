@@ -4,6 +4,12 @@ const express = require('express');
 
 const app = express();
 
+const accountData = fs.readFileSync(path.join(__dirname, 'json', 'accounts.json'), { encoding: 'utf-8' });
+const userData = fs.readFileSync(path.join(__dirname, 'json', 'users.json'), { encoding: 'utf-8' });
+
+const accounts = JSON.parse(accountData);
+const users = JSON.parse(userData);
+
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
