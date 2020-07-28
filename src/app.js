@@ -27,6 +27,9 @@ app.get('/checking', (_, response) => {
 app.get('/credit', (_, response) => {
   response.render('account', { account: accounts.credit });
 })
+app.get('/profile', (_, response) => {
+  response.render('profile', { user: users[0] })
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
