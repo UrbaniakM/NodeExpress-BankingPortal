@@ -18,6 +18,15 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', (_, response) => {
   response.render('index', { title: 'Account Summary', accounts })
 })
+app.get('/savings', (_, response) => {
+  response.render('account', { account: accounts.savings });
+})
+app.get('/checking', (_, response) => {
+  response.render('account', { account: accounts.checking });
+})
+app.get('/credit', (_, response) => {
+  response.render('account', { account: accounts.credit });
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
