@@ -17,19 +17,22 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', (_, response) => {
   response.render('index', { title: 'Account Summary', accounts })
-})
+});
 app.get('/savings', (_, response) => {
   response.render('account', { account: accounts.savings });
-})
+});
 app.get('/checking', (_, response) => {
   response.render('account', { account: accounts.checking });
-})
+});
 app.get('/credit', (_, response) => {
   response.render('account', { account: accounts.credit });
-})
+});
 app.get('/profile', (_, response) => {
   response.render('profile', { user: users[0] })
-})
+});
+app.get('/transfer', (_, response) => {
+  response.render('transfer')
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
