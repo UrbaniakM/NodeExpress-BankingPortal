@@ -34,6 +34,8 @@ app.get('/transfer', (_, response) => {
   response.render('transfer')
 });
 
+app.use(express.urlencoded({ extended: true }));
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`PS Project Running on port ${PORT}!`)
