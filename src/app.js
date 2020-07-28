@@ -36,12 +36,15 @@ app.get('/profile', (_, response) => {
 app.get('/transfer', (_, response) => {
   response.render('transfer')
 });
-app.post('/transfer', (request, _) => {
+app.post('/transfer', (request, response) => {
   const parsedAmount = Number.parseInt(request.body.amount);
   accounts[request.body.from].balance -= parsedAmount;
   accounts[request.body.to].balance += parsedAmount;
+
   const accountsJSON = JSON.stringify(accounts);
   fs.writeFileSync(path.join(__dirname, 'json', 'accounts.json'), accountsJSON, { encoding: 'utf-8' });
+  
+  response.render('transfer', { message: 'Transfer Completed' })
 });
 
 app.use(express.urlencoded({ extended: true }));
