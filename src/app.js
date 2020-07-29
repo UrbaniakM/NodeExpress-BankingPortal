@@ -1,6 +1,8 @@
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { accounts, users, writeJSON } = require('./data');
+const accountRoutes = require('./routes/accounts');
 
 const app = express();
 
@@ -12,15 +14,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', (_, response) => {
   response.render('index', { title: 'Account Summary', accounts })
 });
-app.get('/savings', (_, response) => {
-  response.render('account', { account: accounts.savings });
-});
-app.get('/checking', (_, response) => {
-  response.render('account', { account: accounts.checking });
-});
-app.get('/credit', (_, response) => {
-  response.render('account', { account: accounts.credit });
-});
+
+app.use('/account', accountRoutes)
+
 app.get('/profile', (_, response) => {
   response.render('profile', { user: users[0] })
 });
